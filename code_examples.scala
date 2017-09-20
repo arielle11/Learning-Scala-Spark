@@ -33,3 +33,11 @@ val df = spark.createDataFrame(Seq(
 val list_with_suffixes = list_of_strings map {_ ++ "suffix"}
 val list_with_prefixes = list_of_strings map {"prefix" ++ _}
 
+// add a string (NewElement) to an array of strings (ArrayOfStrings)
+// append an element to array
+// in R: c(ArrayOfStrings, "NewElement")
+ArrayOfStrings :+ "NewElement"
+
+// simple join of two dfs (df1 and df2) when columns to join on have same name (ColName)
+// in R: merge(df1, df2, by = "ColName")
+df1.join(df2, Seq("ColName"))
