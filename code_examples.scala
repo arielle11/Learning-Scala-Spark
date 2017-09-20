@@ -41,3 +41,16 @@ ArrayOfStrings :+ "NewElement"
 // simple join of two dfs (df1 and df2) when columns to join on have same name (ColName)
 // in R: merge(df1, df2, by = "ColName")
 df1.join(df2, Seq("ColName"))
+
+// get distinct elements from an array (Arr)
+// in R: unique(Arr)
+arr.distinct
+
+// get a count of distinct elements
+// in R: length(unique(Arr))
+countDistinct(Arr) ; approx_count_distinct(Arr)
+
+// get a count of distinct elements for all columns in a dataframe (df)
+// in R: apply(X = df,  MARGIN = 2, FUN = function(x){length(unique(x))}
+// can also use countDistinct but approx_count_distinct uses HLL and is faster.
+df.select(df.columns.map(c => approx_count_distinct(col(c)).alias(c)): _*)
