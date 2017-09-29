@@ -54,3 +54,15 @@ countDistinct(Arr) ; approx_count_distinct(Arr)
 // in R: apply(X = df,  MARGIN = 2, FUN = function(x){length(unique(x))}
 // can also use countDistinct but approx_count_distinct uses HLL and is faster.
 df.select(df.columns.map(c => approx_count_distinct(col(c)).alias(c)): _*)
+
+// get structure of a df
+df.printSchema()
+
+// function to drop columns
+ def dropEm( columnsToDrop: Array[String], df: org.apache.spark.sql.DataFrame) : org.apache.spark.sql.DataFrame  = {
+      var cols2drop = columnsToDrop
+      var cols2keep = df.columns.diff(cols2drop)
+      var colNames2keep = cols2keep.map(name => col(name))
+      var sub = df.select(colNames2keep:_*)
+      return sub
+   }
