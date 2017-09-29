@@ -58,7 +58,7 @@ df.select(df.columns.map(c => approx_count_distinct(col(c)).alias(c)): _*)
 // get structure of a df
 df.printSchema()
 
-// function to drop columns
+// function to drop columns from a dataframe (df). Input is an array of column names (Arr)
  def dropEm( columnsToDrop: Array[String], df: org.apache.spark.sql.DataFrame) : org.apache.spark.sql.DataFrame  = {
       var cols2drop = columnsToDrop
       var cols2keep = df.columns.diff(cols2drop)
@@ -66,3 +66,4 @@ df.printSchema()
       var sub = df.select(colNames2keep:_*)
       return sub
    }
+dropEm(Arr, df)
