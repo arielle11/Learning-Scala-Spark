@@ -67,3 +67,7 @@ df.printSchema()
       return sub
    }
 dropEm(Arr, df)
+
+// drop a list of columns names (features2Drop) from a dataframe(df) using foldLeft
+val features2Drop = List("a", "b")
+val subDF = features2Drop.foldLeft(df) { (df, s) => df.drop(s) }
