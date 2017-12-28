@@ -71,3 +71,8 @@ dropEm(Arr, df)
 // drop a list of columns names (features2Drop) from a dataframe(df) using foldLeft
 val features2Drop = List("a", "b")
 val subDF = features2Drop.foldLeft(df) { (df, s) => df.drop(s) }
+
+// check to see if there is a column in a dataframe
+import scala.util.Try
+import org.apache.spark.sql.DataFrame
+def hasColumn(df: DataFrame, path: String) = Try(df(path)).isSuccess
